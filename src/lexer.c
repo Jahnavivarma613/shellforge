@@ -22,15 +22,19 @@ int lexer(char *input, Token tokens[])
             break;
         }
 
-        /* Read a word */
         int j = 0;
 
+        /* Read a token */
         while (input[i] != '\0' &&
                !isspace((unsigned char)input[i]))
         {
-            if (j < MAX_TOKEN_LENGTH - 1)
+            /* Ignore double quotation marks */
+            if (input[i] != '"')
             {
-                tokens[count].value[j++] = input[i];
+                if (j < MAX_TOKEN_LENGTH - 1)
+                {
+                    tokens[count].value[j++] = input[i];
+                }
             }
 
             i++;
